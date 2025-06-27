@@ -3,9 +3,6 @@
 Animated portfolio is a creative, interactive React website that presents your skills, projects, studies, and contact information in a unique conversational style — featuring animated developer/viewer characters, chat bubbles, and smooth section navigation.
 
 🌐 **Live Demo:** [abishek-portfolio-mcul.vercel.app](https://abishek-portfolio-mcul.vercel.app/)
-
-📂 **Source Code:** [github.com/abisheks2004/abishek-portfolio](https://github.com/abisheks2004/abishek-portfolio)
-
 ---
 
 ## 🔍 Key Features
@@ -54,9 +51,6 @@ Animated portfolio is a creative, interactive React website that presents your s
 
 ---
 
-## 🔗 Social Links
-
-- [GitHub](https://github.com/abisheks2004)
 - [LinkedIn](https://linkedin.com/in/abishek-s-3aa542269)
 
 ---
