@@ -50,7 +50,9 @@ Animated portfolio is a creative, interactive React website that presents your s
 5️⃣ Smooth scroll and transitions with Framer Motion
 
 ---
+## 🔗 Social Links
 
+- [GitHub](https://github.com/abisheks2004)
 - [LinkedIn](https://linkedin.com/in/abishek-s-3aa542269)
 
 ---
