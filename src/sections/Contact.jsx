@@ -32,7 +32,7 @@ const Contact = () => {
 
           {/* Input fields */}
           {[
-            { name: "Project", type: "text" },
+            { name: "title", type: "text" },
             { name: "name", type: "text" },
             { name: "email", type: "email" },
           ].map((field, i) => (
@@ -86,7 +86,7 @@ const Contact = () => {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1468.156376750375!2d78.2765776973738!3d11.140350081253532!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1751006182302!5m2!1sen!2sus"></iframe>
+             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d930.2353839127084!2d78.27548426955299!3d11.140583999314465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDA4JzI2LjEiTiA3OMKwMTYnMzQuMSJF!5e1!3m2!1sen!2sin!4v1751258185363!5m2!1sen!2sin"></iframe>
         </motion.div>
       </div>
           
