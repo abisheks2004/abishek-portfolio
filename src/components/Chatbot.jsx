@@ -9,9 +9,12 @@ export default function useChatbot({ userMessage, setBotMessage, scrollToSection
 
   const detectIntent = (msg) => {
     const message = msg.toLowerCase();
-      if (message.includes("home")) return "home";
+    if (message.includes("home")) return "home";
+    if (message.includes("start")) return "home";
+    if (message.includes("portfolio")) return "home";
+    if (message.includes("open")) return "home";
     if (message.includes("project")) return "projects";
-if (message.includes("intro") || message.includes("about")) return "home";
+    if (message.includes("intro") || message.includes("about")) return "home";
     if (message.includes("skill")) return "skills";
     if (message.includes("contact") || message.includes("reach")) return "contact";
     if (["hi", "hello", "hey", "yo"].some(w => message.includes(w))) return "greet";
@@ -35,6 +38,7 @@ if (message.includes("intro") || message.includes("about")) return "home";
         greet: "Hello! 👋 How can I help you?",
         name: "I'm Abishek S — a full-stack developer and student.",
         age: "I'm in my early 20s, pursuing B.E in CSE.",
+        education: "I'm studying at K.S.R. College of Engineering, Tamil Nadu.",
         college: "I'm studying at K.S.R. College of Engineering, Tamil Nadu.",
         feeling: "I'm doing great! Hope you're doing well too.",
         thanks: "Thank you so much! 😊",
@@ -50,7 +54,8 @@ if (message.includes("intro") || message.includes("about")) return "home";
         greet: "Vanakkam da! Enna venum? 😄",
         name: "Naan Abishek S da — full-stack developer cum college student!",
         age: "College la padikren da, so neeye guess paniko 😅",
-        college: "K.S.R. College la padikren — Salem pakkam irukum 🎓",
+        education: "K.S.R. College la padikren da, Tamil Nadu la! 🎓",
+        college: "K.S.R. College la padikren 🎓",
         feeling: "Super da! Naan nalla iruken, neenga epdi?",
         thanks: "Thanks da! Romba santhosham 😁",
         eating: "Sapten da! Nee saptiya illa still work ah? 🍱",

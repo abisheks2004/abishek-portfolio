@@ -9,7 +9,7 @@ export default function Chat({
 }) {
   const [userMessage, setUserMessage] = useState("");
   const [botMessage, setBotMessage] = useState(
-    "Hey I'm Abishek 😎 Ask anything about my portfolio!"
+    "Hey I'm Abishek 😎 Ask about my portfolio!"
   );
 
   const { detectIntent, isThanglish, respond } = useChatbot({
