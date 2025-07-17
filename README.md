@@ -1,4 +1,4 @@
-# 🚀 Interactive Animated Portfolio
+# 🚀 Interactive Portfolio
 
 Animated portfolio is a creative, interactive React website that presents your skills, projects, studies, and contact information in a unique conversational style — featuring animated developer/viewer characters, chat bubbles, and smooth section navigation.
 
