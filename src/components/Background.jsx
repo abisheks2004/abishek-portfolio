@@ -19,13 +19,12 @@ export default function Background() {
       {/* 💻 Dev Terminal Style Code */}
       <div className="absolute inset-0 text-green-400 font-mono opacity-10 p-4 sm:p-5 md:p-6 lg:p-10 whitespace-pre-line select-none pointer-events-none animate-flicker leading-4 sm:leading-5 md:leading-6 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px]">
         <code>
-          {`> import React from 'react';
-> const abi = "Web Developer";
-> abi.skills = ["React", "Tailwind", "Vite", "Framer Motion"];
-> abi.location = "Tamil Nadu, India";
-> abi.say("Vanakkam");
-> System: Portfolio background initiated...
-`}
+                {`> import React from 'react';
+      > const abi = new Developer("Abishek");
+      > abi.skills = ["React", "Tailwind", "Vite", "Framer Motion"];
+      > abi.location = "Tamil Nadu, India";
+      > abi.say("Vanakkam 👋");
+      > System.log("Portfolio background initiated... ✅")`}
         </code>
       </div>
 
@@ -39,7 +38,7 @@ export default function Background() {
                 key={i}
                 className="text-green-600 font-mono opacity-5 leading-4 whitespace-pre-wrap p-0.5 sm:p-1 text-[8px] sm:text-[10px] md:text-[12px]"
               >
-                {Array(40).fill("01").join("\n")}
+                {Array(40).fill("67").join("\n")}
               </div>
             ))}
         </div>
