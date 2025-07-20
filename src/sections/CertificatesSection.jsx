@@ -46,7 +46,7 @@ export default function CertificatesSection() {
           //  Normal Grid View
           <motion.div
             key="grid"
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 m-15 relative bg-black rounded-xl overflow-hidden border-2 border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all"
+            className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 gap-4 p-4 m-15 relative bg-black rounded-xl overflow-hidden border-2 border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
@@ -69,53 +69,65 @@ export default function CertificatesSection() {
         ) : (
           // Accordion View - responsive for mobile & desktop
           <motion.div
-            key="accordion"
-            className={`w-full flex flex-wrap ${
-              isMobile ? "h-auto" : "h-[80vh]"
-            } overflow-hidden gap-4 px-3`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {certificates.map((item, index) => {
-              const isActive = activeIndex === index;
-              const flexValue = isMobile ? (isActive ? 5 : 1) : isActive ? 7 : 1;
+      key="accordion"
+      className={`w-full flex flex-wrap ${
+        isMobile ? "h-auto" : "h-[80vh]"
+      } justify-between gap-4 px-3`}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      {certificates.map((item, index) => {
+        const isActive = activeIndex === index;
+        const flexValue = !isMobile ? (isActive ? 7 : 1) : undefined;
 
-              return (
-                <motion.div
-                  key={index}
-                  className="relative flex-shrink-0 cursor-pointer rounded-[2rem] bg-black p-1.5 mt-4 border-[3px] border-yellow-400 group transition-all duration-500 hover:shadow-[0_0_50px_rgba(234,179,8,0.4)]"
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onMouseLeave={() => setActiveIndex(null)}
-                  animate={{ flex: flexValue }}
-                  style={{
-                    height: isMobile ? "40vh" : "85%",
-                  }}
-                >
-                  {/* Image */}
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="w-full h-full object-cover rounded-[1.5rem] transition-all duration-500 group-hover:brightness-110"
-                  />
-                  {/* Glow Border */}
-                  <div className="absolute inset-0 rounded-[2rem] ring-0 group-hover:ring-4 group-hover:ring-yellow-300/70 transition-all duration-500" />
-                  {/* Title Overlay */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 bg-black/70 text-yellow-300 text-center py-3 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-[1.5rem]"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <h3 className="text-sm sm:text-base font-semibold">
-                      {item.title}
-                    </h3>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+    return (
+      <motion.div
+        key={index}
+        className={`
+          relative cursor-pointer bg-black p-2 
+          border-[2px] border-yellow-400 group transition-all duration-500 
+          hover:shadow-[0_0_30px_rgba(234,179,8,0.3)]
+          ${isMobile ? "w-[48%] rounded-lg" : "flex-shrink-0 rounded-[2rem]"}
+        `}
+        onMouseEnter={() => !isMobile && setActiveIndex(index)}
+        onMouseLeave={() => !isMobile && setActiveIndex(null)}
+        animate={!isMobile ? { flex: flexValue } : {}}
+        style={{
+          height: isMobile ? "23vh" : "85%", 
+        }}
+      >
+        {/* Image */}
+        <img
+          src={item.src}
+          alt={item.title}
+          className={`w-full h-full object-cover ${
+            isMobile ? "rounded-md" : "rounded-[1.5rem]"
+          }`}
+        />
+
+        {/* Desktop hover overlay */}
+        {!isMobile && (
+          <>
+            <div className="absolute inset-0 rounded-[2rem] ring-0 group-hover:ring-4 group-hover:ring-yellow-300/70 transition-all duration-500" />
+            <motion.div
+              className="absolute bottom-0 left-0 right-0 bg-black/70 text-yellow-300 text-center py-3 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-[1.5rem]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.4 }}
+            >
+              <h3 className="text-sm sm:text-base font-semibold">
+                {item.title}
+              </h3>
+            </motion.div>
+          </>
+        )}
+      </motion.div>
+    );
+  })}
+</motion.div>
+
         )}
       </AnimatePresence>
 
