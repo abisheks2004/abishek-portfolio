@@ -66,68 +66,68 @@ export default function CertificatesSection() {
               </motion.div>
             ))}
           </motion.div>
-        ) : (
-          // Accordion View - responsive for mobile & desktop
+        )  : (
+          //  Accordion View 
           <motion.div
-      key="accordion"
-      className={`w-full flex flex-wrap ${
-        isMobile ? "h-auto" : "h-[80vh]"
-      } justify-between gap-4 px-3`}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      {certificates.map((item, index) => {
-        const isActive = activeIndex === index;
-        const flexValue = !isMobile ? (isActive ? 7 : 1) : undefined;
+            key="accordion"
+            className={`w-full ${
+              isMobile
+                ? "grid grid-cols-2 gap-4 px-4 pb-12" 
+                : "flex flex-wrap h-[80vh] justify-between gap-4 px-3"
+            }`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {certificates.map((item, index) => {
+              const isActive = activeIndex === index;
+              const flexValue = !isMobile ? (isActive ? 7 : 1) : undefined;
 
-    return (
-      <motion.div
-        key={index}
-        className={`
-          relative cursor-pointer bg-black p-2 
-          border-[2px] border-yellow-400 group transition-all duration-500 
-          hover:shadow-[0_0_30px_rgba(234,179,8,0.3)]
-          ${isMobile ? "w-[48%] rounded-lg" : "flex-shrink-0 rounded-[2rem]"}
-        `}
-        onMouseEnter={() => !isMobile && setActiveIndex(index)}
-        onMouseLeave={() => !isMobile && setActiveIndex(null)}
-        animate={!isMobile ? { flex: flexValue } : {}}
-        style={{
-          height: isMobile ? "23vh" : "85%", 
-        }}
-      >
-        {/* Image */}
-        <img
-          src={item.src}
-          alt={item.title}
-          className={`w-full h-full object-cover ${
-            isMobile ? "rounded-md" : "rounded-[1.5rem]"
-          }`}
-        />
+              return (
+                <motion.div
+                  key={index}
+                  className={`relative cursor-pointer bg-black p-2 
+                    border-[2px] border-yellow-400 group transition-all duration-500 
+                    hover:shadow-[0_0_30px_rgba(234,179,8,0.3)]
+                    ${isMobile ? "rounded-md" : "flex-shrink-0 rounded-[2rem]"}
+                  `}
+                  onMouseEnter={() => !isMobile && setActiveIndex(index)}
+                  onMouseLeave={() => !isMobile && setActiveIndex(null)}
+                  animate={!isMobile ? { flex: flexValue } : {}}
+                  style={{
+                    height: isMobile ? "22vh" : "85%",
+                  }}
+                >
+                  {/* Image */}
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className={`w-full h-full object-cover ${
+                      isMobile ? "rounded-md" : "rounded-[1.5rem]"
+                    }`}
+                  />
 
-        {/* Desktop hover overlay */}
-        {!isMobile && (
-          <>
-            <div className="absolute inset-0 rounded-[2rem] ring-0 group-hover:ring-4 group-hover:ring-yellow-300/70 transition-all duration-500" />
-            <motion.div
-              className="absolute bottom-0 left-0 right-0 bg-black/70 text-yellow-300 text-center py-3 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-[1.5rem]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <h3 className="text-sm sm:text-base font-semibold">
-                {item.title}
-              </h3>
-            </motion.div>
-          </>
-        )}
-      </motion.div>
-    );
-  })}
-</motion.div>
-
+                  {/* Desktop hover overlay */}
+                  {!isMobile && (
+                    <>
+                      <div className="absolute inset-0 rounded-[2rem] ring-0 group-hover:ring-4 group-hover:ring-yellow-300/70 transition-all duration-500" />
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 bg-black/70 text-yellow-300 text-center py-3 opacity-0 group-hover:opacity-100 transition-opacity rounded-b-[1.5rem]"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <h3 className="text-sm sm:text-base font-semibold">
+                          {item.title}
+                        </h3>
+                      </motion.div>
+                    </>
+                  )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
         )}
       </AnimatePresence>
 
