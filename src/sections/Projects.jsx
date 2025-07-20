@@ -5,7 +5,7 @@ const projects = [
   {
     title: "FSLAKWS",
     description:
-      "Real-time multilingual keyword spotting system with audio input,  transcription, and keyword detection using Hugging Face.",
+      "Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models.",
     tech: ["Node.js", "HuggingFace", "Express.js", "React"],
     github: "https://github.com/abisheks2004/fslakws",
     live: "https://fslakws.onrender.com",
@@ -35,23 +35,27 @@ const projects = [
     live: "https://abisheks2004.github.io/Digital_Solutions_Hug",
   },
   {
-    title: "YouTube Frontend Clone",
+    title: "Game Store – Shopping Cart",
     description:
-      "Static clone of YouTube homepage layout with sidebar, search, and grid cards.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/abisheks2004/youtube-clone",
-    live: "https://abisheks2004.github.io/youtube-clone/",
+      "A responsive game store with dynamic cart functionality. Features quantity control (+/-), total price calculation, and a mobile-friendly side cart panel.",
+    tech: ["HTML5", "CSS3", "JavaScript"],
+    github: "https://github.com/abisheks2004/game-store",
+    live: "https://abisheks2004.github.io/game-store/",
   },
   {
-  title: "Personal Portfolio (HTML/CSS/JS)",
-  description:
-    "Responsive personal portfolio website built using HTML, CSS, and JavaScript to showcase skills, projects, and contact info with a modern layout and smooth UX.",
-  tech: ["HTML", "CSS", "JavaScript"],
-  github: "https://github.com/abisheks2004/Portfolio",
-  live: "https://abisheks2004.github.io/Portfolio/",
-},
+    title: "Smart Text Corrector (AI/ML)",
+    description:
+      "AI-powered grammar & spelling corrector with real-time corrections using TextBlob & SymSpell. Supports file upload, live correction via Flask API, and highlights suggested changes.",
+    tech: [
+      "Python",
+      "HTML",
+      "CSS",
+      "JavaScript",
+    ],
+    github: "https://github.com/abisheks2004/smart-text-corrector",
+    live: "https://smart-text-corrector.onrender.com",
+  },
 ];
-
 
 const Projects = () => {
   return (
@@ -69,7 +73,7 @@ const Projects = () => {
         My Projects
       </motion.h2>
 
-      {/* Cards */}
+      {/* Project Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl w-full">
         {projects.map((project, index) => (
           <motion.div
@@ -92,6 +96,7 @@ const Projects = () => {
                 {project.description}
               </p>
 
+              {/* Tech stack */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tag, i) => (
                   <span
@@ -103,6 +108,7 @@ const Projects = () => {
                 ))}
               </div>
 
+              {/* Links */}
               <div className="flex gap-4 items-center mt-2">
                 <a
                   href={project.github}

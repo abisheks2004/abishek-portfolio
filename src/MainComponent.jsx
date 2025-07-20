@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import App from "./App"; // ✅ Make sure App.jsx is default exported
+import App from "./App"; 
 
 const MainComponent = () => {
   const [introDone, setIntroDone] = React.useState(false);
@@ -11,6 +11,8 @@ const MainComponent = () => {
     aboutRef: React.useRef(null),
     skillsRef: React.useRef(null),
     projectsRef: React.useRef(null),
+    certificatesRef: React.useRef(null), 
+    achievementsRef: React.useRef(null), 
     contactRef: React.useRef(null),
   };
 
@@ -19,7 +21,13 @@ const MainComponent = () => {
       <Routes>
         <Route
           path="/*"
-          element={<App introDone={introDone} setIntroDone={setIntroDone} refs={refs} />}
+          element={
+            <App
+              introDone={introDone}
+              setIntroDone={setIntroDone}
+              refs={refs}
+            />
+          }
         />
       </Routes>
     </Router>

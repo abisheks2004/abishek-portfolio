@@ -5,7 +5,15 @@ import useChatbot from "./Chatbot";
 
 export default function Chat({
   setIntroDone,
-  refs: { homeRef, aboutRef, skillsRef, projectsRef, contactRef },
+  refs: {
+    homeRef,
+    aboutRef,
+    skillsRef,
+    projectsRef,
+    achievementsRef,
+    certificatesRef,
+    contactRef
+  },
 }) {
   const [userMessage, setUserMessage] = useState("");
   const [botMessage, setBotMessage] = useState(
@@ -15,26 +23,15 @@ export default function Chat({
   const { detectIntent, isThanglish, respond } = useChatbot({
     userMessage,
     setBotMessage,
-    scrollToSection: (refName) => {
+    goToSection: (refName) => {
+      sessionStorage.setItem("requestedSection", refName);
+      sessionStorage.setItem("exitedChat", "true");
       setIntroDone(true);
-
-      const refMap = {
-        home: homeRef,
-        about: aboutRef,
-        skills: skillsRef,
-        projects: projectsRef,
-        contact: contactRef,
-      };
-
-      setTimeout(() => {
-        refMap[refName]?.current?.scrollIntoView({ behavior: "smooth" });
-      }, 400);
     },
   });
 
   const handleSend = () => {
-    if (userMessage.trim() === "") return;
-
+    if (!userMessage.trim()) return;
     const intent = detectIntent(userMessage);
     respond(intent, isThanglish(userMessage));
     setUserMessage("");
