@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,7 +22,7 @@ export default function CertificatesSection() {
     const checkScreen = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    checkScreen(); 
+    checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
@@ -29,7 +30,9 @@ export default function CertificatesSection() {
   return (
     <section
       id="certificates"
-      className="w-full h-screen bg-black text-white flex flex-col justify-center items-center"
+      className={`w-full ${
+        isMobile ? "min-h-screen" : "h-screen"
+      } bg-black text-white flex flex-col justify-center items-center`}
     >
       {/* Heading */}
       <motion.h2
@@ -43,7 +46,7 @@ export default function CertificatesSection() {
 
       <AnimatePresence mode="wait">
         {showGrid ? (
-          //  Normal Grid View
+          // Normal Grid View
           <motion.div
             key="grid"
             className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-4 gap-4 p-4 m-15 relative bg-black rounded-xl overflow-hidden border-2 border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all"
@@ -66,13 +69,13 @@ export default function CertificatesSection() {
               </motion.div>
             ))}
           </motion.div>
-        )  : (
-          //  Accordion View 
+        ) : (
+          // Accordion View
           <motion.div
             key="accordion"
             className={`w-full ${
               isMobile
-                ? "grid grid-cols-2 gap-4 px-4 pb-12" 
+                ? "grid grid-cols-2 gap-4 px-4 pb-12"
                 : "flex flex-wrap h-[80vh] justify-between gap-4 px-3"
             }`}
             initial={{ opacity: 0, y: 30 }}
@@ -96,7 +99,7 @@ export default function CertificatesSection() {
                   onMouseLeave={() => !isMobile && setActiveIndex(null)}
                   animate={!isMobile ? { flex: flexValue } : {}}
                   style={{
-                    height: isMobile ? "22vh" : "85%",
+                    height: isMobile ? "18vh" : "85%",
                   }}
                 >
                   {/* Image */}
