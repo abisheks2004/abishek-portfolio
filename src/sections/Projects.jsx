@@ -38,7 +38,7 @@ const projects = [
     title: "Game Store – Shopping Cart",
     description:
       "A responsive game store with dynamic cart functionality. Features quantity control (+/-), total price calculation, and a mobile-friendly side cart panel.",
-    tech: ["HTML5", "CSS3", "JavaScript"],
+    tech: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/abisheks2004/game-store",
     live: "https://abisheks2004.github.io/game-store/",
   },
