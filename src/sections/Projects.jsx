@@ -6,7 +6,7 @@ const projects = [
     title: "FSLAKWS",
     description:
       "Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models.",
-    tech: ["Node.js", "HuggingFace", "Express.js", "React"],
+    tech: ["Node.js", "HuggingFace", "Express.js", "Javascript"],
     github: "https://github.com/abisheks2004/fslakws",
     live: "https://fslakws.onrender.com",
   },
