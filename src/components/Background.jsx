@@ -13,7 +13,7 @@ export default function Background() {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      <div className="absolute inset-0 text-green-400 font-mono opacity-4 p-4 sm:p-5 md:p-6 lg:p-10 whitespace-pre-line select-none pointer-events-none animate-flicker leading-4 sm:leading-5 md:leading-6 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px]">
+      <div className="absolute inset-0 text-green-400 font-mono opacity-[0.02] p-4 sm:p-5 md:p-6 lg:p-10 whitespace-pre-line select-none pointer-events-none animate-flicker leading-4 sm:leading-5 md:leading-6 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px]">
         <code>
           {`> import React from 'react';
 > const abi = new Developer("Abishek");
@@ -31,7 +31,7 @@ export default function Background() {
             .map((_, i) => (
               <div
                 key={i}
-                className="text-green-600 font-mono opacity-5 leading-4 whitespace-pre-wrap p-0.5 sm:p-1 text-[8px] sm:text-[10px] md:text-[12px]"
+                className="text-green-600 font-mono opacity-[0.012] leading-4 whitespace-pre-wrap p-0.5 sm:p-1 text-[8px] sm:text-[10px] md:text-[12px]"
               >
                 {Array(50).fill("0101").join("\n")}
               </div>
