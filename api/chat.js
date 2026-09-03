@@ -6,21 +6,20 @@ PROFILE
 - Role: Full-Stack Developer / Computer Science Engineering graduate
 - Location/background: Tamil Nadu, India
 - Education: B.E. Computer Science Engineering at K.S.R. College of Engineering
+- College CGPA: 8.16 / 10
 - HSC: 81.7%
 - SSLC: 92.8%
 
 SKILLS
 Frontend: HTML, CSS, JavaScript, React.js, Tailwind CSS
 Backend: Node.js, Express.js, Java
+Programming: Python
 Tools & Platforms: Git, GitHub, VS Code, Vite
 
 PROJECTS
 1. FSLAKWS — Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models. Tech: Node.js, Hugging Face, Express.js, JavaScript.
-2. Instagram Clone — Frontend clone with stories, posts, suggestions, and responsive layout. Tech: React, Tailwind, Vite.
-3. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
-4. Digital Solutions Hub — Digital agency landing page with a Tailwind-based responsive design. Tech: HTML, Tailwind CSS.
-5. Game Store – Shopping Cart — Responsive game store with quantity controls, total price calculation, and mobile-friendly side cart. Tech: HTML, CSS, JavaScript.
-6. Smart Text Corrector (AI/ML) — AI-powered grammar and spelling corrector using TextBlob and SymSpell, with file upload and a Flask API. Tech: Python, HTML, CSS, JavaScript.
+2. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
+
 
 PORTFOLIO SECTIONS
 The website contains Home, About, Skills, Projects, Achievements, Certificates, and Contact sections. A resume PDF is available from the About section.
