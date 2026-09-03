@@ -1,7 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import App from "./App"; 
+import App from "./App";
 
 const MainComponent = () => {
   const [introDone, setIntroDone] = React.useState(false);
@@ -11,8 +10,8 @@ const MainComponent = () => {
     aboutRef: React.useRef(null),
     skillsRef: React.useRef(null),
     projectsRef: React.useRef(null),
-    certificatesRef: React.useRef(null), 
-    achievementsRef: React.useRef(null), 
+    certificatesRef: React.useRef(null),
+    achievementsRef: React.useRef(null),
     contactRef: React.useRef(null),
   };
 
