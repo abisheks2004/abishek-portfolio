@@ -20,7 +20,6 @@ PROJECTS
 1. FSLAKWS — Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models. Tech: Node.js, Hugging Face, Express.js, JavaScript.
 2. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
 
-
 PORTFOLIO SECTIONS
 The website contains Home, About, Skills, Projects, Achievements, Certificates, and Contact sections. A resume PDF is available from the About section.
 
@@ -34,12 +33,10 @@ BEHAVIOR
 `;
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  if (!process.env.OPENAI_API_KEY) {
-    return res.status(500).json({ error: "OPENAI_API_KEY is not configured." });
+  if (!process.env.GEMINI_API_KEY) {
+    return res.status(500).json({ error: "GEMINI_API_KEY is not configured." });
   }
 
   try {
@@ -53,32 +50,46 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "A user message is required." });
     }
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-5-mini",
-        instructions: portfolioContext,
-        input: safeMessages,
-        store: false,
-        max_output_tokens: 350,
-      }),
-    });
+    const contents = safeMessages.map((message) => ({
+      role: message.role === "assistant" ? "model" : "user",
+      parts: [{ text: message.content }],
+    }));
+
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": process.env.GEMINI_API_KEY,
+        },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: portfolioContext }] },
+          contents,
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 350,
+          },
+        }),
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("OpenAI API error:", data);
+      console.error("Gemini API error:", data);
       return res.status(response.status).json({
         error: "The AI service could not answer right now.",
       });
     }
 
+    const message = data.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text || "")
+      .join("")
+      .trim();
+
     return res.status(200).json({
-      message: data.output_text?.trim() || "I couldn't generate a response right now.",
+      message: message || "I couldn't generate a response right now.",
     });
   } catch (error) {
     console.error("Portfolio AI error:", error);
