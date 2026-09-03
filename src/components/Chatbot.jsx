@@ -19,8 +19,19 @@ export default function useChatbot({ setBotMessage, setLoading, goToSection }) {
         body: JSON.stringify({ messages }),
       });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "AI request failed");
+      const contentType = response.headers.get("content-type") || "";
+      let data;
+
+      if (contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        data = { error: text || "The AI service returned an unexpected response." };
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || `AI request failed (${response.status})`);
+      }
 
       let reply = data.message || "I couldn't generate a response right now.";
 
@@ -35,7 +46,9 @@ export default function useChatbot({ setBotMessage, setLoading, goToSection }) {
     } catch (error) {
       console.error("Portfolio AI error:", error);
       setBotMessage(
-        "Sorry, I couldn't connect to my AI assistant right now. Please try again in a moment. 🤖"
+        error.message?.includes("504") || error.message?.toLowerCase().includes("timeout")
+          ? "The AI assistant took too long to respond. Please try again in a moment. 🤖"
+          : "Sorry, I couldn't connect to my AI assistant right now. Please try again in a moment. 🤖"
       );
     } finally {
       setLoading(false);
