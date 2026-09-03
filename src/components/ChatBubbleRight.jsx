@@ -1,4 +1,3 @@
-import React from "react";
 import { Send } from "lucide-react";
 
 export default function ChatBubbleRight({ message, onChange, onSend, loading }) {
