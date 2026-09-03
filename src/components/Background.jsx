@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Background() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#111] to-[#1a1a1a]">
@@ -17,12 +15,12 @@ export default function Background() {
 
       <div className="absolute inset-0 text-green-400 font-mono opacity-10 p-4 sm:p-5 md:p-6 lg:p-10 whitespace-pre-line select-none pointer-events-none animate-flicker leading-4 sm:leading-5 md:leading-6 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[12px]">
         <code>
-                {`> import React from 'react';
-      > const abi = new Developer("Abishek");
-      > abi.skills = ["React", "Tailwind", "Vite", "Framer Motion"];
-      > abi.location = "Tamil Nadu, India";
-      > abi.say("Welcome");
-      > System.log("Portfolio background initiated...")`}
+          {`> import React from 'react';
+> const abi = new Developer("Abishek");
+> abi.skills = ["React", "Tailwind", "Vite", "Framer Motion"];
+> abi.location = "Tamil Nadu, India";
+> abi.say("Welcome");
+> System.log("Portfolio background initiated...")`}
         </code>
       </div>
 
