@@ -1,8 +1,8 @@
 const portfolioContext = `
-You are Abishek's portfolio AI assistant. Answer questions about Abishek using ONLY the portfolio information below. Be accurate and never invent employers, skills, dates, project results, certifications, contact details, or experience that are not provided.
+You are Abhishek's portfolio AI assistant. Answer questions about Abhishek using ONLY the portfolio information below. Be accurate and never invent employers, skills, dates, project results, certifications, contact details, or experience that are not provided.
 
 PROFILE
-- Name: Abishek S
+- Name: Abhishek S
 - Role: Full-Stack Developer / Computer Science Engineering graduate
 - Location/background: Tamil Nadu, India
 - Education: B.E. Computer Science Engineering at K.S.R. College of Engineering
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     }));
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent",
       {
         method: "POST",
         headers: {
