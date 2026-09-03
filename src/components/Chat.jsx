@@ -1,27 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ChatBubbleLeft from "./ChatBubbleLeft";
 import ChatBubbleRight from "./ChatBubbleRight";
 import useChatbot from "./Chatbot";
 
-export default function Chat({
-  setIntroDone,
-  refs: {
-    homeRef,
-    aboutRef,
-    skillsRef,
-    projectsRef,
-    achievementsRef,
-    certificatesRef,
-    contactRef
-  },
-}) {
+export default function Chat({ setIntroDone }) {
   const [userMessage, setUserMessage] = useState("");
   const [botMessage, setBotMessage] = useState(
     "Hey I'm Abishek 😎 Ask about my portfolio!"
   );
 
   const { detectIntent, isThanglish, respond } = useChatbot({
-    userMessage,
     setBotMessage,
     goToSection: (refName) => {
       sessionStorage.setItem("requestedSection", refName);
