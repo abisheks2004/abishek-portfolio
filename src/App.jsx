@@ -1,5 +1,4 @@
-
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FiHome } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -19,7 +18,8 @@ export default function App({ introDone, setIntroDone, refs }) {
     const alreadyExitedChat = sessionStorage.getItem("exitedChat");
     if (alreadyExitedChat !== "true") return;
     setIntroDone(true);
-  }, []);
+  }, [setIntroDone]);
+
   useEffect(() => {
     if (!introDone) return;
 
@@ -40,18 +40,17 @@ export default function App({ introDone, setIntroDone, refs }) {
           ? refMap[requestedSection]
           : refs.homeRef;
 
-      console.log("👉 Scrolling to:", requestedSection, targetRef?.current);
-
       if (targetRef?.current) {
         targetRef.current.scrollIntoView({ behavior: "smooth" });
-        sessionStorage.removeItem("requestedSection"); // clear after scroll
+        sessionStorage.removeItem("requestedSection");
       } else {
         setTimeout(scrollToRequested, 300);
       }
     };
 
-    setTimeout(scrollToRequested, 600);
-  }, [introDone]); 
+    const timeoutId = setTimeout(scrollToRequested, 600);
+    return () => clearTimeout(timeoutId);
+  }, [introDone, refs]);
 
   const goToHome = () => {
     sessionStorage.setItem("exitedChat", "true");
@@ -75,14 +74,9 @@ export default function App({ introDone, setIntroDone, refs }) {
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="relative w-full h-screen"
           >
-            {/* Floating Home Button */}
             <button
               onClick={goToHome}
-              className="fixed top-5 right-6 z-[999] flex items-center gap-2 
-                        bg-yellow-400/90 backdrop-blur-md text-black font-semibold 
-                        px-5 py-2 rounded-full shadow-lg 
-                        hover:bg-yellow-300 hover:shadow-yellow-400/50 
-                        transition-all duration-300 hover:scale-105"
+              className="fixed top-5 right-6 z-[999] flex items-center gap-2 bg-yellow-400/90 backdrop-blur-md text-black font-semibold px-5 py-2 rounded-full shadow-lg hover:bg-yellow-300 hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105"
             >
               <FiHome size={20} />
               <span>Home</span>
@@ -90,7 +84,7 @@ export default function App({ introDone, setIntroDone, refs }) {
 
             <Background />
             <Character />
-            <Chat setIntroDone={setIntroDone} refs={refs} />
+            <Chat setIntroDone={setIntroDone} />
           </motion.div>
         ) : (
           <motion.div
@@ -108,7 +102,6 @@ export default function App({ introDone, setIntroDone, refs }) {
                 }}
               />
             </div>
-
             <div ref={refs.aboutRef}><About /></div>
             <div ref={refs.skillsRef}><Skills /></div>
             <div ref={refs.projectsRef}><Projects /></div>
