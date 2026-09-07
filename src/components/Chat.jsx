@@ -31,11 +31,11 @@ export default function Chat({ setIntroDone }) {
     await respond(nextMessages);
   };
 
-const suggestions = [
-  "Tell me about yourself",
-  "Show me your skills",
-  "Show me your projects",
-];
+  const suggestions = [
+    { label: "About Me", query: "Tell me about yourself" },
+    { label: "Skills", query: "Show me your skills" },
+    { label: "Projects", query: "Show me your projects" },
+  ];
 
   return (
     <>
@@ -43,16 +43,16 @@ const suggestions = [
         message={loading ? "Thinking... 🤖" : botMessage}
       />
 
-      {/* Suggested Quick Prompt Chips */}
-      <div className="absolute top-[165px] sm:top-auto sm:bottom-[280px] md:bottom-[330px] lg:bottom-[370px] right-3 sm:right-6 md:right-[80px] lg:right-[180px] z-20 flex flex-wrap justify-end gap-1.5 max-w-[92%] sm:max-w-[340px] md:max-w-[400px]">
-        {suggestions.map((prompt) => (
+      {/* Suggested Quick Prompt Chips - in ONE single horizontal line */}
+      <div className="absolute top-[160px] sm:top-auto sm:bottom-[280px] md:bottom-[330px] lg:bottom-[370px] right-3 sm:right-6 md:right-[80px] lg:right-[180px] z-20 flex flex-row flex-nowrap items-center justify-end gap-1.5 sm:gap-2">
+        {suggestions.map(({ label, query }) => (
           <button
-            key={prompt}
-            onClick={() => handleSend(prompt)}
+            key={label}
+            onClick={() => handleSend(query)}
             disabled={loading}
-            className="text-[10px] sm:text-xs bg-gray-900/80 hover:bg-yellow-400 hover:text-black text-gray-200 border border-yellow-400/30 px-2.5 py-1 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer disabled:opacity-40"
+            className="text-[11px] sm:text-xs font-medium whitespace-nowrap bg-gray-900/90 hover:bg-yellow-400 hover:text-black text-gray-200 border border-yellow-400/40 px-3 py-1 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer disabled:opacity-40 shadow-md active:scale-95"
           >
-            {prompt}
+            {label}
           </button>
         ))}
       </div>

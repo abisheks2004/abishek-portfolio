@@ -45,11 +45,24 @@ export default function useChatbot({ setBotMessage, setLoading, goToSection }) {
       setBotMessage(reply);
     } catch (error) {
       console.error("Portfolio AI error:", error);
-      setBotMessage(
-        error.message?.includes("504") || error.message?.toLowerCase().includes("timeout")
-          ? "The AI assistant took too long to respond. Please try again in a moment. 🤖"
-          : "Sorry, I couldn't connect to my AI assistant right now. Please try again in a moment. 🤖"
-      );
+      const lastUserMsg = messages[messages.length - 1]?.content?.toLowerCase() || "";
+
+      if (lastUserMsg.includes("about") || lastUserMsg.includes("who")) {
+        setBotMessage("I'm Abishek S, a Full-Stack Developer passionate about creating high-impact web apps and AI solutions! 🚀");
+        setTimeout(() => goToSection("about"), 800);
+      } else if (lastUserMsg.includes("skill")) {
+        setBotMessage("Abishek's core technical stack includes React, Node.js, Express, Python, Tailwind CSS, and AI engineering! ⚙️");
+        setTimeout(() => goToSection("skills"), 800);
+      } else if (lastUserMsg.includes("project")) {
+        setBotMessage("Explore Abishek's featured projects: CareerShield AI, FSLAKWS, Instagram Clone, and Target Trio! 💻");
+        setTimeout(() => goToSection("projects"), 800);
+      } else {
+        setBotMessage(
+          error.message?.includes("504") || error.message?.toLowerCase().includes("timeout")
+            ? "The AI assistant took too long to respond. Please try again in a moment. 🤖"
+            : "Sorry, I couldn't connect to my AI assistant right now. Please try again in a moment. 🤖"
+        );
+      }
     } finally {
       setLoading(false);
     }
