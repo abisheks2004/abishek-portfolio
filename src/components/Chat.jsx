@@ -21,8 +21,8 @@ export default function Chat({ setIntroDone }) {
     },
   });
 
-  const handleSend = async () => {
-    const text = userMessage.trim();
+  const handleSend = async (customText) => {
+    const text = (typeof customText === "string" ? customText : userMessage).trim();
     if (!text || loading) return;
 
     const nextMessages = [...messages, { role: "user", content: text }];
@@ -31,17 +31,38 @@ export default function Chat({ setIntroDone }) {
     await respond(nextMessages);
   };
 
+  const suggestions = [
+    "Tell me about CareerShield AI",
+    "Show your skills",
+    "Go to Projects",
+  ];
+
   return (
-    <div className="w-full max-w-screen-md mx-auto px-2 sm:px-4 md:px-8 lg:px-10 py-4 space-y-4">
+    <>
       <ChatBubbleLeft
         message={loading ? "Thinking... 🤖" : botMessage}
       />
+
+      {/* Suggested Quick Prompt Chips */}
+      <div className="absolute top-[165px] sm:top-auto sm:bottom-[280px] md:bottom-[330px] lg:bottom-[370px] right-3 sm:right-6 md:right-[80px] lg:right-[180px] z-20 flex flex-wrap justify-end gap-1.5 max-w-[92%] sm:max-w-[340px] md:max-w-[400px]">
+        {suggestions.map((prompt) => (
+          <button
+            key={prompt}
+            onClick={() => handleSend(prompt)}
+            disabled={loading}
+            className="text-[10px] sm:text-xs bg-gray-900/80 hover:bg-yellow-400 hover:text-black text-gray-200 border border-yellow-400/30 px-2.5 py-1 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer disabled:opacity-40"
+          >
+            {prompt}
+          </button>
+        ))}
+      </div>
+
       <ChatBubbleRight
         message={userMessage}
         onChange={(e) => setUserMessage(e.target.value)}
-        onSend={handleSend}
+        onSend={() => handleSend()}
         loading={loading}
       />
-    </div>
+    </>
   );
 }

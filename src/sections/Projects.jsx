@@ -34,35 +34,6 @@ const projects = [
     github: "https://github.com/abisheks2004/Target-Trio",
     live: "https://abisheks2004.github.io/Target-Trio/",
   },
-  {
-    title: "Digital Solutions Hub",
-    description:
-      "Landing page for a digital agency highlighting services using smooth design and Tailwind layout.",
-    tech: ["HTML", "Tailwind CSS"],
-    github: "https://github.com/abisheks2004/Digital_Solutions_Hug",
-    live: "https://abisheks2004.github.io/Digital_Solutions_Hug",
-  },
-  {
-    title: "Game Store – Shopping Cart",
-    description:
-      "A responsive game store with dynamic cart functionality. Features quantity control (+/-), total price calculation, and a mobile-friendly side cart panel.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/abisheks2004/game-store",
-    live: "https://abisheks2004.github.io/game-store/",
-  },
-  {
-    title: "Smart Text Corrector (AI/ML)",
-    description:
-      "AI-powered grammar & spelling corrector with real-time corrections using TextBlob & SymSpell. Supports file upload, live correction via Flask API, and highlights suggested changes.",
-    tech: [
-      "Python",
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
-    github: "https://github.com/abisheks2004/smart-text-corrector",
-    live: "https://smart-text-corrector.onrender.com",
-  },
 ];
 
 const Projects = () => {
@@ -82,7 +53,7 @@ const Projects = () => {
       </motion.h2>
 
       {/* Project Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
         {projects.map((project, index) => (
           <motion.div
             key={index}

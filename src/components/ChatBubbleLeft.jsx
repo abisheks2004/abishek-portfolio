@@ -1,12 +1,13 @@
 export default function ChatBubbleLeft({ message }) {
   return (
-    <div className="absolute bottom-[280px] sm:bottom-[300px] md:bottom-[320px] left-2 sm:left-6 md:left-[120px] lg:left-[300px] z-10 w-[85%] xs:w-[90%] sm:w-auto max-w-[40%] sm:max-w-[300px] text-xs sm:text-sm font-sans">
-      <div className="bg-gradient-to-br from-white to-gray-200 text-black px-3 py-2 sm:px-4 sm:py-3 rounded-2xl shadow-xl relative min-h-[40px] min-w-[100px] transition-all duration-300 break-words">
-        <span>{message || "..."}</span>
+    <div className="absolute top-20 sm:top-auto sm:bottom-[210px] md:bottom-[260px] lg:bottom-[300px] left-3 sm:left-6 md:left-[90px] lg:left-[200px] z-20 w-[92%] sm:w-auto max-w-[92%] sm:max-w-[340px] md:max-w-[400px] text-xs sm:text-sm font-sans transition-all duration-300">
+      <div className="bg-white/95 backdrop-blur-md text-gray-900 border border-white/60 px-4 py-3 rounded-2xl shadow-2xl relative min-h-[44px] transition-all duration-300 break-words">
+        <p className="leading-relaxed font-medium max-h-[30vh] sm:max-h-[220px] overflow-y-auto pr-1">
+          {message || "..."}
+        </p>
 
-        <div
-          className="absolute -left-2 bottom-2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-white border-b-[1px] border-b-transparent"
-        />
+        {/* Speech tail for tablet / desktop */}
+        <div className="hidden sm:block absolute -bottom-2.5 left-8 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-white/95" />
       </div>
     </div>
   );

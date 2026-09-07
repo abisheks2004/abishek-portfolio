@@ -13,7 +13,7 @@ export default function LeftCharacter() {
   if (!animationData) return null; 
 
   return (
-    <div className="absolute bottom-[60px] sm:bottom-[80px] md:bottom-[100px] lg:bottom-[20px] left-2 sm:left-6 md:left-16 lg:left-24 z-10 w-[140px] sm:w-[180px] md:w-[260px] lg:w-[300px] drop-shadow-xl">
+    <div className="absolute bottom-2 sm:bottom-4 md:bottom-6 lg:bottom-8 left-2 sm:left-6 md:left-12 lg:left-20 z-10 w-[110px] sm:w-[160px] md:w-[230px] lg:w-[280px] drop-shadow-xl pointer-events-none select-none transition-all duration-300">
       <Lottie animationData={animationData} loop autoplay />
     </div>
   );

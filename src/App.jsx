@@ -72,13 +72,13 @@ export default function App({ introDone, setIntroDone, refs }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="relative w-full h-screen"
+            className="relative w-full h-[100dvh] min-h-[520px] overflow-hidden"
           >
             <button
               onClick={goToHome}
-              className="fixed top-5 right-6 z-[999] flex items-center gap-2 bg-yellow-400/90 backdrop-blur-md text-black font-semibold px-5 py-2 rounded-full shadow-lg hover:bg-yellow-300 hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105"
+              className="fixed top-3 right-3 sm:top-5 sm:right-6 z-[999] flex items-center gap-1.5 sm:gap-2 bg-yellow-400/95 backdrop-blur-md text-black font-semibold text-xs sm:text-sm px-3.5 py-1.5 sm:px-5 sm:py-2 rounded-full shadow-lg hover:bg-yellow-300 hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <FiHome size={20} />
+              <FiHome size={18} />
               <span>Home</span>
             </button>
 

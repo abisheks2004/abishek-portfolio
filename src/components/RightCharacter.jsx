@@ -14,7 +14,7 @@ export default function RightCharacter() {
   if (!animationData) return null; 
 
   return (
-    <div className="absolute bottom-[60px] sm:bottom-[80px] md:bottom-[100px] lg:bottom-[80px] right-0 sm:right-4 md:right-16 lg:right-24 z-10 w-[180px] sm:w-[220px] md:w-[260px] lg:w-[320px] flex flex-col items-center">
+    <div className="absolute bottom-2 sm:bottom-4 md:bottom-6 lg:bottom-8 right-1 sm:right-6 md:right-12 lg:right-20 z-10 w-[120px] sm:w-[170px] md:w-[230px] lg:w-[280px] flex flex-col items-center pointer-events-none select-none transition-all duration-300">
       <Lottie animationData={animationData} loop autoplay />
     </div>
   );

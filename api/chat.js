@@ -21,9 +21,6 @@ PROJECTS
 2. FSLAKWS — Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models. Tech: Node.js, Hugging Face, Express.js, JavaScript.
 3. Instagram Clone — Frontend clone with stories, posts, suggestions, and responsive layout. Tech: React, Tailwind CSS, Vite.
 4. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
-5. Smart Text Corrector (AI/ML) — AI-powered grammar & spelling corrector with real-time corrections using TextBlob & SymSpell. Tech: Python, Flask, JavaScript.
-6. Game Store - Shopping Cart — Responsive game storefront with dynamic cart calculations and mobile drawer. Tech: HTML, CSS, JavaScript.
-7. Digital Solutions Hub — Landing page for a digital agency with modern responsive styling. Tech: HTML, Tailwind CSS.
 
 PORTFOLIO SECTIONS
 The website contains Home, About, Skills, Projects, Achievements, Certificates, and Contact sections. A resume PDF is available from the About section.
