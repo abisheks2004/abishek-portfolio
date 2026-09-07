@@ -31,11 +31,11 @@ export default function Chat({ setIntroDone }) {
     await respond(nextMessages);
   };
 
-  const suggestions = [
-    "Tell me about CareerShield AI",
-    "Show your skills",
-    "Go to Projects",
-  ];
+const suggestions = [
+  "Tell me about yourself",
+  "Show me your skills",
+  "Show me your projects",
+];
 
   return (
     <>
