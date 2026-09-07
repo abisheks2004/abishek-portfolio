@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { useState, useEffect, useRef } from "react";
-import { FaGraduationCap } from "react-icons/fa";
+import { FaGraduationCap, FaFileAlt } from "react-icons/fa";
 import { useInView } from "framer-motion";
 import avatar from "../assets/profile1.jpg";
 
@@ -157,12 +157,13 @@ const About = () => {
         href="/ABISHEK.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-10 px-6 py-3 border border-yellow-400 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all"
+        className="mt-10 inline-flex items-center gap-2 px-6 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        📄 View Resume
+        <FaFileAlt />
+        <span>View Resume</span>
       </motion.a>
     </section>
   );

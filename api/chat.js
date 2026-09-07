@@ -17,8 +17,13 @@ Programming: Python
 Tools & Platforms: Git, GitHub, VS Code, Vite
 
 PROJECTS
-1. FSLAKWS — Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models. Tech: Node.js, Hugging Face, Express.js, JavaScript.
-2. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
+1. CareerShield AI — Production-grade recruitment scam intelligence platform. Combines Google Gemini 1.5 Flash and forensic heuristics to detect job fraud, check schemes, advance fees, and brand impersonation. Features batch scanning, PDF/JSON reporting, and CI/CD pipelines. Tech: React 19, Node.js, Gemini AI, Tailwind CSS, Docker.
+2. FSLAKWS — Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models. Tech: Node.js, Hugging Face, Express.js, JavaScript.
+3. Instagram Clone — Frontend clone with stories, posts, suggestions, and responsive layout. Tech: React, Tailwind CSS, Vite.
+4. Target Trio — Interactive number game with real-time logic and difficulty levels. Tech: HTML, CSS, JavaScript.
+5. Smart Text Corrector (AI/ML) — AI-powered grammar & spelling corrector with real-time corrections using TextBlob & SymSpell. Tech: Python, Flask, JavaScript.
+6. Game Store - Shopping Cart — Responsive game storefront with dynamic cart calculations and mobile drawer. Tech: HTML, CSS, JavaScript.
+7. Digital Solutions Hub — Landing page for a digital agency with modern responsive styling. Tech: HTML, Tailwind CSS.
 
 PORTFOLIO SECTIONS
 The website contains Home, About, Skills, Projects, Achievements, Certificates, and Contact sections. A resume PDF is available from the About section.
@@ -33,7 +38,7 @@ BEHAVIOR
 `;
 
 const GEMINI_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

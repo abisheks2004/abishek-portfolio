@@ -3,6 +3,14 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const projects = [
   {
+    title: "CareerShield AI",
+    description:
+      "Production-grade recruitment scam intelligence platform. Combines Google Gemini 1.5 Flash and forensic heuristics to detect job fraud, check schemes, advance fees, and brand impersonation. Features multi-item batch scanning and incident export.",
+    tech: ["React 19", "Node.js", "Gemini AI", "Tailwind CSS", "Docker", "CI/CD"],
+    github: "https://github.com/abisheks2004/careershield-ai",
+    live: "https://github.com/abisheks2004/careershield-ai",
+  },
+  {
     title: "FSLAKWS",
     description:
       "Real-time multilingual keyword spotting system with audio input, transcription, and keyword detection using Hugging Face models.",
