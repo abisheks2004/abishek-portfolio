@@ -39,22 +39,60 @@ const GEMINI_URL =
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+function getSmartFallback(userText) {
+  const query = (userText || "").toLowerCase();
+
+  if (query.includes("age") || query.includes("old") || query.includes("dob") || query.includes("birth")) {
+    return "Abishek is currently completing his final year in Computer Science Engineering (batch 2022–2026), making him approximately 21–22 years old.";
+  }
+
+  if (query.includes("about") || query.includes("who") || query.includes("yourself") || query.includes("intro") || query.includes("you")) {
+    return "I'm Abishek S, a Full-Stack Developer passionate about building high-performance web applications and AI-driven solutions.\n[SECTION:about]";
+  }
+
+  if (query.includes("skill") || query.includes("stack") || query.includes("tech") || query.includes("language")) {
+    return "Abishek's core technical stack includes React, Node.js, Express, Python, Tailwind CSS, Vite, Docker, and Gemini AI.\n[SECTION:skills]";
+  }
+
+  if (query.includes("project") || query.includes("work") || query.includes("career") || query.includes("shield")) {
+    return "Abishek's featured projects include CareerShield AI (recruitment scam detection), FSLAKWS (keyword spotting), Instagram Clone, and Target Trio!\n[SECTION:projects]";
+  }
+
+  if (query.includes("resume") || query.includes("cv")) {
+    return "You can view and download Abishek's official resume directly from the About section!\n[SECTION:about]";
+  }
+
+  if (query.includes("contact") || query.includes("email") || query.includes("reach") || query.includes("hire") || query.includes("github")) {
+    return "You can get in touch with Abishek through the Contact section below, or connect with him on GitHub (abisheks2004)!\n[SECTION:contact]";
+  }
+
+  if (query.includes("education") || query.includes("college") || query.includes("degree") || query.includes("cgpa")) {
+    return "Abishek is pursuing Computer Science Engineering at K.S.R. College of Engineering with a strong CGPA of 8.16 / 10.";
+  }
+
+  return "I'm Abishek's AI assistant! Feel free to ask me anything about his projects, skills, education, or resume.\n[SECTION:about]";
+}
+
 async function callGemini(contents) {
-  let lastStatus = 503;
+  const apiKey = (process.env.GEMINI_API_KEY || "").trim();
+  if (!apiKey) {
+    throw new Error("GEMINI_API_KEY not configured");
+  }
+
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
 
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 9000);
 
     try {
-      const response = await fetch(GEMINI_URL, {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY,
         },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: portfolioContext }] },
+          system_instruction: { parts: [{ text: portfolioContext }] },
           contents,
           generationConfig: {
             temperature: 0.4,
@@ -64,53 +102,47 @@ async function callGemini(contents) {
         signal: controller.signal,
       });
 
-      lastStatus = response.status;
-
       if (response.ok) return response.json();
 
-      const retryable = [429, 500, 502, 503, 504].includes(response.status);
-      if (!retryable || attempt === 1) {
-        const errorBody = await response.text();
-        console.error("Gemini API error:", response.status, errorBody);
-        const error = new Error("Gemini request failed");
-        error.status = response.status;
-        throw error;
-      }
-    } catch (error) {
-      if (error.name === "AbortError") {
-        lastStatus = 504;
-        console.warn(`Gemini request timed out (attempt ${attempt + 1}).`);
-      } else if (error.status) {
-        throw error;
-      } else {
-        console.error("Gemini network error:", error);
-        lastStatus = 502;
+      // If system_instruction was rejected, fallback to in-prompt context
+      if (response.status === 400 && attempt === 0) {
+        const fallbackRes = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: `System Context:\n${portfolioContext}\n\nConversation:\n${JSON.stringify(contents)}` }]
+              }
+            ],
+            generationConfig: {
+              temperature: 0.4,
+              maxOutputTokens: 350,
+            }
+          }),
+          signal: controller.signal,
+        });
+        if (fallbackRes.ok) return fallbackRes.json();
       }
 
-      if (attempt === 1) {
-        const finalError = new Error("Gemini service unavailable");
-        finalError.status = lastStatus;
-        throw finalError;
-      }
+      const errText = await response.text();
+      console.warn(`Gemini attempt ${attempt + 1} failed (${response.status}):`, errText);
+    } catch (error) {
+      console.warn(`Gemini error (attempt ${attempt + 1}):`, error.message);
     } finally {
       clearTimeout(timeout);
     }
 
-    await sleep(500);
+    await sleep(400);
   }
 
-  const error = new Error("Gemini service unavailable");
-  error.status = lastStatus;
-  throw error;
+  throw new Error("Gemini API unavailable");
 }
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  if (!process.env.GEMINI_API_KEY) {
-    return res.status(500).json({ error: "GEMINI_API_KEY is not configured." });
   }
 
   try {
@@ -123,37 +155,64 @@ export default async function handler(req, res) {
           ["user", "assistant"].includes(message.role) &&
           typeof message.content === "string"
       )
-      .slice(-12);
+      .slice(-10);
 
-    if (!safeMessages.length || !safeMessages.some((message) => message.role === "user")) {
+    const lastUserMessage = safeMessages
+      .slice()
+      .reverse()
+      .find((m) => m.role === "user")?.content || "";
+
+    if (!lastUserMessage) {
       return res.status(400).json({ error: "A user message is required." });
     }
 
-    const contents = safeMessages.map((message) => ({
-      role: message.role === "assistant" ? "model" : "user",
-      parts: [{ text: message.content }],
-    }));
+    // Build properly alternating contents array for Gemini
+    const contents = [];
+    let lastRole = null;
+    for (const msg of safeMessages) {
+      const role = msg.role === "assistant" ? "model" : "user";
+      if (role === lastRole && contents.length > 0) {
+        contents[contents.length - 1].parts[0].text += `\n${msg.content}`;
+      } else {
+        contents.push({
+          role,
+          parts: [{ text: msg.content }],
+        });
+        lastRole = role;
+      }
+    }
 
-    const data = await callGemini(contents);
-    const message = data.candidates?.[0]?.content?.parts
-      ?.map((part) => part.text || "")
-      .join("")
-      .trim();
+    // Gemini requires the first message to be role 'user'
+    while (contents.length > 0 && contents[0].role !== "user") {
+      contents.shift();
+    }
+
+    let reply = "";
+
+    if (process.env.GEMINI_API_KEY && contents.length > 0) {
+      try {
+        const data = await callGemini(contents);
+        reply = data.candidates?.[0]?.content?.parts
+          ?.map((part) => part.text || "")
+          .join("")
+          .trim();
+      } catch (err) {
+        console.warn("Using smart fallback due to Gemini error:", err.message);
+      }
+    }
+
+    // If Gemini didn't produce a reply, use intelligent fallback
+    if (!reply) {
+      reply = getSmartFallback(lastUserMessage);
+    }
 
     return res.status(200).json({
-      message: message || "I couldn't generate a response right now.",
+      message: reply,
     });
   } catch (error) {
-    console.error("Portfolio AI error:", error);
-    const status = [429, 500, 502, 503, 504].includes(error.status)
-      ? error.status
-      : 500;
-
-    return res.status(status).json({
-      error:
-        status === 504
-          ? "The AI service took too long to respond. Please try again."
-          : "The AI service could not answer right now. Please try again.",
+    console.error("Portfolio chat handler error:", error);
+    return res.status(200).json({
+      message: getSmartFallback("about"),
     });
   }
 }
